@@ -2,21 +2,32 @@ import React from 'react';
 import {
   View,
 } from 'react-native';
+import { SearchBar } from 'react-native-elements';
 import ContactList from '../../components/ContactList';
-import SearchBar from '../../components/SearchBar';
+// import SearchBar from '../../components/SearchBar';
 
 class Contacts extends React.Component {
-  async onSearch() {
-
+  constructor(props) {
+    super(props);
+    // etting default state
+    this.state = { search: '' };
   }
 
   render() {
+    const { search } = this.state;
     return (
       <View>
         <SearchBar
-          onSearch={() => this.onSearch()}
+          round
+          searchIcon={{ size: 24 }}
+          onChangeText={(text) => this.setState({ search: text })}
+          onClear={(text) => this.setState({ search: '' })}
+          placeholder="Type Here..."
+          value={this.state.search}
         />
-        <ContactList />
+        <ContactList
+          search={(search)}
+        />
       </View>
     );
   }
