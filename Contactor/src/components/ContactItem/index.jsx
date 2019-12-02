@@ -10,12 +10,11 @@ const ContactItem = ({
   id, name, phone, photo, navigation: { navigate },
 }) => (
   <TouchableOpacity
-    onPress={() => navigate('ContactPreview', { selectedContact: id })}
+    onPress={() => navigate('ContactPreviewView', { selectedContact: id })}
   >
     <View style={styles.itemContainer}>
       <Text style={styles.title}>{id}</Text>
       <Text style={styles.title}>{name}</Text>
-      <Text style={styles.title}>{phone}</Text>
       <View>
         <Image
           style={styles.image}
