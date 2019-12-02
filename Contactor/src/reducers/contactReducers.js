@@ -10,7 +10,7 @@ const lists = (state = data.contacts, action) => {
         {
           id: action.id,
           name: action.payload.name,
-          phoneNumber: action.payload.phoneNumber,
+          phone: action.payload.phone,
           photo: action.payload.photo,
         },
       ];

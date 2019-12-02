@@ -18,12 +18,12 @@ class AddContact extends React.Component {
     super(props);
     this.state = {
       name: '',
-      phoneNumber: '',
+      phone: '',
     };
   }
 
   render() {
-    const { name, phoneNumber } = this.state;
+    const { name, phone } = this.state;
     const {
       isOpen, closeModal, onSubmit, takePhoto, selectFromCameraRoll,
     } = this.props;
@@ -32,10 +32,10 @@ class AddContact extends React.Component {
         isOpen={isOpen}
         closeModal={closeModal}
       >
-        <Text style={defaultStyles.modalTitleText}>
-          Enter the desired title for this list
-        </Text>
         <View>
+          <Text style={defaultStyles.modalTitleText}>
+          Name:
+          </Text>
           <TextInput
             onChangeText={(text) => this.setState({ name: text })}
             placeholder="Contacts name"
@@ -43,8 +43,11 @@ class AddContact extends React.Component {
             style={defaultStyles.textInput}
             textContentType="name"
           />
+          <Text style={defaultStyles.modalTitleText}>
+          phone:
+          </Text>
           <TextInput
-            onChangeText={(text) => this.setState({ phoneNumber: text })}
+            onChangeText={(text) => this.setState({ phone: text })}
             placeholder="Conacts phoneNumber"
             maxLength={29}
             style={defaultStyles.textInput}
@@ -67,9 +70,9 @@ class AddContact extends React.Component {
           onPress={() => {
             this.setState({
               name: '',
-              phoneNumber: '',
+              phone: '',
             });
-            onSubmit(name, phoneNumber);
+            onSubmit(name, phone);
           }}
         >
           <Text style={defaultStyles.buttonText}>Submit</Text>

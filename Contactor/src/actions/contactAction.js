@@ -1,12 +1,12 @@
 import * as constants from '../constants';
 
 let nextBoardId = 5;
-export const addContact = (name, phone, image) => {
+export const addContact = (name, phone, photo) => {
   nextBoardId += 1;
   return {
-    type: constants.ADD_BOARD,
+    type: constants.ADD_CONTACT,
     id: nextBoardId,
-    payload: { name, phone, image },
+    payload: { name, phone, photo },
   };
 };
 
