@@ -1,28 +1,31 @@
 import React from 'react';
 import {
-  TouchableHighlight, TextInput, Text, View,
+  TouchableHighlight,
+  TextInput,
+  Text,
+  View,
+  TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import { Entypo } from '@expo/vector-icons';
 import Modal from '../Modal';
 import defaultStyles from '../../../styles';
+import styles from './styles';
 
 
-class AddListModal extends React.Component {
+class AddContact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
       phoneNumber: '',
-      image: '',
     };
   }
 
-
-
   render() {
-    const { name, phoneNumber, image } = this.state;
+    const { name, phoneNumber } = this.state;
     const {
-      isOpen, closeModal, onSubmit,
+      isOpen, closeModal, onSubmit, takePhoto, selectFromCameraRoll,
     } = this.props;
     return (
       <Modal
@@ -41,7 +44,7 @@ class AddListModal extends React.Component {
             textContentType="name"
           />
           <TextInput
-            onChangeText={(text) => this.setState({ name: text })}
+            onChangeText={(text) => this.setState({ phoneNumber: text })}
             placeholder="Conacts phoneNumber"
             maxLength={29}
             style={defaultStyles.textInput}
@@ -49,15 +52,24 @@ class AddListModal extends React.Component {
             textContentType="telephoneNumber"
           />
         </View>
+        <View
+          style={styles.icons}
+        >
+          <TouchableOpacity onPress={() => takePhoto()}>
+            <Entypo style={styles.icon} name="camera" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => selectFromCameraRoll()}>
+            <Entypo style={styles.icon} name="image" />
+          </TouchableOpacity>
+        </View>
         <TouchableHighlight
           style={defaultStyles.button}
           onPress={() => {
             this.setState({
               name: '',
               phoneNumber: '',
-              image: '',
             });
-            onSubmit(name, phoneNumber, image);
+            onSubmit(name, phoneNumber);
           }}
         >
           <Text style={defaultStyles.buttonText}>Submit</Text>
@@ -67,10 +79,12 @@ class AddListModal extends React.Component {
   }
 }
 
-AddListModal.propTypes = {
+AddContact.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  takePhoto: PropTypes.func.isRequired,
+  selectFromCameraRoll: PropTypes.func.isRequired,
 };
 
-export default AddListModal;
+export default AddContact;
