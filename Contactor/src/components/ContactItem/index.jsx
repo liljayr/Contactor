@@ -1,30 +1,38 @@
 import React from 'react';
+import { withNavigation } from 'react-navigation';
 import {
-  View, Text, Image,
+  View, Text, Image, TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
 const ContactItem = ({
-  id, name, phone, photo,
+  id, name, phone, photo, navigation: { navigate },
 }) => (
-  <View style={styles.itemContainer}>
-    <Text style={styles.title}>{id}</Text>
-    <Text style={styles.title}>{name}</Text>
-    <Text style={styles.title}>{phone}</Text>
-    <View>
-      <Image
-        style={styles.image}
-        resizeMode="cover"
-        source={{ uri: photo }}
-      />
+  <TouchableOpacity
+    onPress={() => navigate('ContactPreview', { selectedContact: id })}
+  >
+    <View style={styles.itemContainer}>
+      <Text style={styles.title}>{id}</Text>
+      <Text style={styles.title}>{name}</Text>
+      <Text style={styles.title}>{phone}</Text>
+      <View>
+        <Image
+          style={styles.image}
+          resizeMode="cover"
+          source={{ uri: photo }}
+        />
+      </View>
     </View>
-  </View>
+  </TouchableOpacity>
 );
 ContactItem.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
-export default ContactItem;
+export default withNavigation(ContactItem);
