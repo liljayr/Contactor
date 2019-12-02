@@ -10,7 +10,13 @@ const ContactList = ({
   <View>
     <FlatList
       numColumns={1}
-      data={contacts}
+      data={contacts.sort((a, b) => {
+        const x = a.name.toLowerCase();
+        const y = b.name.toLowerCase();
+        if (x < y) { return -1; }
+        if (x > y) { return 1; }
+        return 0;
+      })}
       renderItem={({
         item: {
           id, name, phone, photo,
