@@ -1,4 +1,5 @@
 import React from 'react';
+import ContactList from '../../components/ContactList';
 import {
   Text,
 } from 'react-native';
@@ -6,9 +7,7 @@ import {
 class Contacts extends React.Component {
   render() {
     return (
-      <Text>
-      HELLO
-      </Text>
+      <ContactList/>
     );
   }
 }
