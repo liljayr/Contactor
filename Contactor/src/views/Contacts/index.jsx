@@ -1,36 +1,88 @@
 import React from 'react';
-import {
-  View,
-} from 'react-native';
-import { SearchBar } from 'react-native-elements';
+import { View, Alert } from 'react-native';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+// import { SearchBar } from 'react-native-elements';
 import ContactList from '../../components/ContactList';
-// import SearchBar from '../../components/SearchBar';
+import SearchBar from '../../components/SearchBar';
+import AddModal from '../../components/Modal/AddContact';
+import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
+import { addContact } from '../../actions/contactAction';
 
 class Contacts extends React.Component {
   constructor(props) {
     super(props);
-    // etting default state
-    this.state = { search: '' };
+    this.state = {
+      isAddModalOpen: false,
+      photo: '',
+      search: '',
+    };
   }
 
+
+  async onSearch(searchInput) {
+    this.setState({ search: searchInput });
+  }
+
+  async takePhoto() {
+    const photo = await takePhoto();
+    if (photo.length > 0) { this.setState({ photo }); }
+  }
+
+
+  async selectFromCameraRoll() {
+    const photo = await selectFromCameraRoll();
+    if (photo.length > 0) { this.setState({ photo }); }
+  }
+
+  async addContact(name, phone) {
+    const { photo } = this.state;
+    const { addContactToState } = this.props;
+    if (photo === '') {
+      Alert.alert(
+        'A photo is is required!',
+        'You can add a photo by selecting the camera or album icon',
+      );
+    } else {
+      addContactToState(name, phone, photo);
+      this.setState({
+        isAddModalOpen: false,
+        photo: '',
+      });
+    }
+  }
+
+
   render() {
-    const { search } = this.state;
+    const {
+      isAddModalOpen, search,
+    } = this.state;
     return (
       <View>
         <SearchBar
-          round
-          searchIcon={{ size: 24 }}
-          onChangeText={(text) => this.setState({ search: text })}
-          onClear={(text) => this.setState({ search: '' })}
-          placeholder="Type Here..."
-          value={this.state.search}
+          onAdd={() => this.setState({ isAddModalOpen: true })}
+          onSearch={(searchInput) => this.onSearch(searchInput)}
         />
         <ContactList
-          search={(search)}
+          search={search}
+        />
+
+        <AddModal
+          isOpen={isAddModalOpen}
+          closeModal={() => this.setState({ isAddModalOpen: false })}
+          takePhoto={() => this.takePhoto()}
+          onSubmit={(name, phone) => this.addContact(name, phone)}
+          selectFromCameraRoll={() => this.selectFromCameraRoll()}
         />
       </View>
     );
   }
 }
 
-export default Contacts;
+Contacts.propTypes = {
+  addContactToState: PropTypes.func.isRequired,
+};
+
+export default connect(null, {
+  addContactToState: addContact,
+})(Contacts);
