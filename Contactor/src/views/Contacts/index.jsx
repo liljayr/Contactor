@@ -1,13 +1,23 @@
 import React from 'react';
-import ContactList from '../../components/ContactList';
 import {
-  Text,
+  View,
 } from 'react-native';
+import ContactList from '../../components/ContactList';
+import SearchBar from '../../components/SearchBar';
 
 class Contacts extends React.Component {
+  async onSearch() {
+
+  }
+
   render() {
     return (
-      <ContactList/>
+      <View>
+        <SearchBar
+          onSearch={() => this.onSearch()}
+        />
+        <ContactList />
+      </View>
     );
   }
 }
