@@ -3,9 +3,9 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import Contacts from '../views/Contacts';
-import ContactPreview from '../views/ContactPreview';
+import ContactPreviewView from '../views/ContactPreviewView';
 
 export default createAppContainer(createStackNavigator({
   Contacts,
-  ContactPreview,
+  ContactPreviewView,
 }));

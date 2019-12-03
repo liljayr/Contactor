@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+// import { SearchBar } from 'react-native-elements';
 import ContactList from '../../components/ContactList';
 import SearchBar from '../../components/SearchBar';
 import AddModal from '../../components/Modal/AddContact';
@@ -17,6 +18,7 @@ class Contacts extends React.Component {
       isAddModalOpen: false,
       photo: '',
       nextId: 1,
+      search: '',
     };
   }
 
@@ -25,9 +27,8 @@ class Contacts extends React.Component {
   }
 
 
-  async onSearch() {
-    const photo = await takePhoto();
-    if (photo.length > 0) { this.setState({ photo }); }
+  async onSearch(searchInput) {
+    this.setState({ search: searchInput });
   }
 
   async fetchItems() {
@@ -78,12 +79,16 @@ class Contacts extends React.Component {
     const {
       isAddModalOpen,
       contacts,
+      search,
     } = this.state;
     return (
       <View>
         <SearchBar
           onAdd={() => this.setState({ isAddModalOpen: true })}
-          onSearch={() => this.onSearch()}
+          onSearch={(searchInput) => this.onSearch(searchInput)}
+        />
+        <ContactList
+          search={search}
         />
 
         <ContactList

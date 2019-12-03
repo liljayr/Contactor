@@ -5,11 +5,17 @@ import ListItem from '../ContactItem';
 
 const ContactList = ({
   contacts,
+  search,
 }) => (
   <View>
     <FlatList
       numColumns={1}
-      data={contacts.sort((a, b) => {
+      data={contacts.filter((item) => {
+        // applying filter for the inserted text in search bar
+        const itemData = item.name ? item.name.toString().toUpperCase() : ''.toUpperCase();
+        const textData = search.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      }).sort((a, b) => {
         const x = a.name.toLowerCase();
         const y = b.name.toLowerCase();
         if (x < y) { return -1; }
@@ -41,6 +47,7 @@ ContactList.propTypes = {
     phone: PropTypes.string.isRequired,
     photo: PropTypes.string.isRequired,
   })).isRequired,
+  search: PropTypes.string.isRequired,
 };
 
 export default ContactList;
