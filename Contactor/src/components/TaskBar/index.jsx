@@ -11,29 +11,32 @@ const TaskBar = ({
   onAdd,
   onRemove,
   hasSelected,
+  value,
 }) => (
   <View styleName="horizontal" style={styles.toolbar}>
-    <SearchBar
-      style={styles.toolbarSearch}
-      round
-      searchIcon={{ size: 24 }}
-      onChangeText={(text) => onSearch(text)}
-      onClear={() => onSearch('')}
-      placeholder="Type Here..."
-    />
-    <TouchableHighlight
-      style={styles.toolbarAction}
-      onPress={onAdd}
-    >
-      <Text style={styles.toolbarActionText}>Add</Text>
-    </TouchableHighlight>
-    <TouchableHighlight
-      style={styles.toolbarAction}
-      onPress={onRemove}
-      disable={hasSelected}
-    >
-      <Text style={styles.toolbarActionText}>delete</Text>
-    </TouchableHighlight>
+    <View style={styles.toolbarSearch}>
+      <SearchBar
+        round
+        searchIcon={{ size: 25 }}
+        onChangeText={(text) => onSearch(text)}
+        onClear={() => onSearch('')}
+        placeholder="Type Here..."
+        value={value}
+      />
+    </View>
+    <View style={styles.toolbarAction}>
+      <TouchableHighlight onPress={onAdd}>
+        <Text style={styles.toolbarActionText}>Add</Text>
+      </TouchableHighlight>
+    </View>
+    <View style={styles.toolbarAction}>
+      <TouchableHighlight
+        onPress={onRemove}
+        disable={hasSelected}
+      >
+        <Text style={styles.toolbarActionText}>delete</Text>
+      </TouchableHighlight>
+    </View>
   </View>
 );
 
@@ -42,6 +45,7 @@ TaskBar.propTypes = {
   onAdd: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
   hasSelected: PropTypes.bool.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 export default TaskBar;
