@@ -6,6 +6,7 @@ import ListItem from '../ContactItem';
 const ContactList = ({
   contacts,
   search,
+  onLongPress,
 }) => (
   <View>
     <FlatList
@@ -32,6 +33,7 @@ const ContactList = ({
           name={name}
           phone={phone}
           photo={photo}
+          onLongPress={onLongPress}
         />
       )}
       keyExtractor={(contact) => contact.id.toString()}
@@ -48,6 +50,7 @@ ContactList.propTypes = {
     photo: PropTypes.string.isRequired,
   })).isRequired,
   search: PropTypes.string.isRequired,
+  onLongPress: PropTypes.func.isRequired,
 };
 
 export default ContactList;

@@ -14,24 +14,36 @@ export const cleanDirectory = async () => {
   await FileSystem.deleteAsync(contactDirectory);
 };
 
+
 export const loadContact = async (fileName) => FileSystem.readAsStringAsync(`${contactDirectory}/${fileName}`, {
   encoding: FileSystem.EncodingType.UTF8,
 });
 
-export const addContactFile = async (name, contents) => {
-  const fileUri = `${name}.json`;
+
+export const getContactById = async (id) => {
+  const fileName = `${id}.json`;
+  return JSON.parse(await loadContact(fileName));
+};
+
+
+export const addContactFile = async (id, contents) => {
+  const fileName = `${id}.json`;
   await onException(
     () => FileSystem.writeAsStringAsync(
-      `${contactDirectory}/${fileUri}`,
+      `${contactDirectory}/${fileName}`,
       contents,
       { encoding: FileSystem.EncodingType.UTF8 },
     ),
   );
-  return JSON.parse(await loadContact(fileUri));
+  return JSON.parse(await loadContact(fileName));
 };
 
 export const remove = async (name) => onException(() => FileSystem.deleteAsync(`${contactDirectory}/${name}.json`, { idempotent: true }));
 
+export const editContact = async (id, contents) => {
+  remove(id);
+  return addContactFile(id, contents);
+};
 
 const setupDirectory = async () => {
   const dir = await FileSystem.getInfoAsync(contactDirectory);

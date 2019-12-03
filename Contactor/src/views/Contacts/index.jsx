@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import ContactList from '../../components/ContactList';
 import SearchBar from '../../components/SearchBar';
 import AddModal from '../../components/Modal/AddContact';
-import { addContactFile, getAllContacts } from '../../services/fileService';
+import { addContactFile, getAllContacts, remove } from '../../services/fileService';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
 import { addContact } from '../../actions/contactAction';
 
@@ -15,6 +15,7 @@ class Contacts extends React.Component {
     super(props);
     this.state = {
       contacts: [],
+      selectedContacts: [],
       isAddModalOpen: false,
       photo: '',
       nextId: 1,
@@ -26,9 +27,28 @@ class Contacts extends React.Component {
     await this.fetchItems();
   }
 
+  onContactLongPress(id) {
+    const { selectedContacts } = this.state;
+    if (selectedContacts.indexOf(id) !== -1) {
+      // The image is already within the list
+      this.setState({ selectedContacts: selectedContacts.filter((contact) => contact !== id) });
+    } else {
+      // Add the new image
+      this.setState({ selectedContacts: [...selectedContacts, id] });
+    }
+  }
 
   async onSearch(searchInput) {
     this.setState({ search: searchInput });
+  }
+
+  async deleteSelectedContacts() {
+    const { selectedContacts, contacts } = this.state;
+    await Promise.all(selectedContacts.map((contact) => remove(contact)));
+    this.setState({
+      selectedContacts: [],
+      contacts: contacts.filter((contact) => selectedContacts.indexOf(contact.id) === -1),
+    });
   }
 
   async fetchItems() {
@@ -87,12 +107,11 @@ class Contacts extends React.Component {
           onAdd={() => this.setState({ isAddModalOpen: true })}
           onSearch={(searchInput) => this.onSearch(searchInput)}
         />
-        <ContactList
-          search={search}
-        />
 
         <ContactList
           contacts={contacts}
+          search={search}
+          onLongPress={(id) => this.onContactLongPress(id)}
         />
 
         <AddModal
