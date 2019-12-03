@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, Text, Image, FlatList} from 'react-native';
-//import { withNavigation } from 'react-navigation';
+import {
+  View, Text, Image, FlatList,
+} from 'react-native';
+// import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import PreviewItem from '../ContactItem';
@@ -12,14 +14,17 @@ const ContactPreview = ({
     <FlatList
       numColumns={1}
       data={contacts.filter((contact) => contact.id === selectedContact)}
-      renderItem = {({item: {
-        id, name, phone, photo
-      }}) => (
+      renderItem={({
+        item: {
+          id, name, phone, photo,
+        },
+      }) => (
         <PreviewItem
-        id={id}
-        name={name}
-        phone={phone}
-        photo={photo}/>
+          id={id}
+          name={name}
+          phone={phone}
+          photo={photo}
+        />
       )}
       keyExtractor={(contact) => contact.id.toString()}
     />
@@ -27,12 +32,12 @@ const ContactPreview = ({
 );
 
 const mapStateToProps = (state) => ({
-  contacts: state.contacts
+  contacts: state.contacts,
 });
 
 ContactPreview.propTypes = {
-  selectedContact:PropTypes.number.isRequired,
-}
+  selectedContact: PropTypes.number.isRequired,
+};
 
 ContactPreview.propTypes = {
   selectedContact: PropTypes.number.isRequired,

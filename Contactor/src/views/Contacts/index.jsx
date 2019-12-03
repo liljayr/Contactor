@@ -102,7 +102,7 @@ class Contacts extends React.Component {
       <View>
         <TaskBar
           onAdd={() => this.setState({ isAddModalOpen: true })}
-          onRemove={() => this.setState({ isAddModalOpen: true })}
+          onRemove={() => this.deleteSelectedContacts()}
           onSearch={(searchInput) => this.onSearch(searchInput)}
           hasSelected={false}
         />
