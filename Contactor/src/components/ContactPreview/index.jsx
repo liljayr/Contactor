@@ -1,14 +1,10 @@
 import React from 'react';
-import {
-  View, Text, Image, FlatList,
-} from 'react-native';
-// import { withNavigation } from 'react-navigation';
-import { connect } from 'react-redux';
+import { View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
-import PreviewItem from '../ContactItem';
+import PreviewItem from '../ContactPreviewItem';
 
 const ContactPreview = ({
-  selectedContact, contacts, contactInfo,
+  selectedContact, contacts,
 }) => (
   <View>
     <FlatList
@@ -31,9 +27,6 @@ const ContactPreview = ({
   </View>
 );
 
-const mapStateToProps = (state) => ({
-  contacts: state.contacts,
-});
 
 ContactPreview.propTypes = {
   selectedContact: PropTypes.number.isRequired,
@@ -49,4 +42,4 @@ ContactPreview.propTypes = {
   })).isRequired,
 };
 
-export default connect(mapStateToProps)(ContactPreview);
+export default ContactPreview;
