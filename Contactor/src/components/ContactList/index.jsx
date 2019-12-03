@@ -7,6 +7,7 @@ const ContactList = ({
   contacts,
   search,
   onLongPress,
+  selectedContacts,
 }) => (
   <View>
     <FlatList
@@ -34,6 +35,7 @@ const ContactList = ({
           phone={phone}
           photo={photo}
           onLongPress={onLongPress}
+          isSelected={selectedContacts.indexOf(id) !== -1}
         />
       )}
       keyExtractor={(contact) => contact.id.toString()}
@@ -51,6 +53,7 @@ ContactList.propTypes = {
   })).isRequired,
   search: PropTypes.string.isRequired,
   onLongPress: PropTypes.func.isRequired,
+  selectedContacts: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default ContactList;

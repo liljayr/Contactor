@@ -1,4 +1,7 @@
 import * as FileSystem from 'expo-file-system';
+import * as Contacts from 'expo-contacts';
+import * as Permissions from 'expo-permissions';
+import defaultPhoto from '../resources/defaultPhoto.png';
 
 const contactDirectory = `${FileSystem.documentDirectory}contacts`;
 
@@ -57,4 +60,31 @@ export const getAllContacts = async () => {
   await setupDirectory();
   const result = await onException(() => FileSystem.readDirectoryAsync(contactDirectory));
   return Promise.all(result.map(async (fileName) => (JSON.parse(await loadContact(fileName)))));
+};
+
+export const importAllContacts = async () => {
+  const status = await Permissions.askAsync(Permissions.CONTACTS);
+  if (status.permissions.contacts.status === 'granted') {
+    let data = await Contacts.getContactsAsync();
+    data = data.data;
+    let contactInfo = '';
+    for (let i = 0; i < data.length; i += 1) {
+      if (data[i].imageAvailable) {
+        contactInfo = {
+          id: i + 1,
+          name: data[i].firstName,
+          phone: data[i].phoneNumbers[0].number,
+          photo: data[i].image.uri,
+        };
+      } else {
+        contactInfo = {
+          id: i + 1,
+          name: data[i].firstName,
+          phone: data[i].phoneNumbers[0].number,
+          photo: 'https://icon-library.net/images/default-profile-icon/default-profile-icon-16.jpg',
+        };
+      }
+      await addContactFile(i + 1, JSON.stringify(contactInfo));
+    }
+  }
 };

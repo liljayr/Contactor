@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Alert } from 'react-native';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 // import { SearchBar } from 'react-native-elements';
 import ContactList from '../../components/ContactList';
 import TaskBar from '../../components/TaskBar';
 import AddModal from '../../components/Modal/AddContact';
-import { addContactFile, getAllContacts, remove } from '../../services/fileService';
+import {
+  addContactFile, getAllContacts, remove, importAllContacts,
+} from '../../services/fileService';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
 
 class Contacts extends React.Component {
@@ -53,7 +53,11 @@ class Contacts extends React.Component {
   async fetchItems() {
     const contacts = await getAllContacts();
     this.setState({ contacts });
-    if (contacts.length > 0) this.setState({ nextId: contacts[contacts.length - 1].id + 1 });
+    if (contacts.length > 0) {
+      this.setState({ nextId: contacts[contacts.length - 1].id + 1 });
+    } else {
+      await importAllContacts();
+    }
   }
 
 
@@ -97,6 +101,7 @@ class Contacts extends React.Component {
       isAddModalOpen,
       contacts,
       search,
+      selectedContacts,
     } = this.state;
     return (
       <View>
@@ -111,6 +116,7 @@ class Contacts extends React.Component {
           contacts={contacts}
           search={search}
           onLongPress={(id) => this.onContactLongPress(id)}
+          selectedContacts={selectedContacts}
         />
 
         <AddModal
