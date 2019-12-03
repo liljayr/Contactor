@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, FlatList } from 'react-native';
-import { connect } from 'react-redux';
 import ListItem from '../ContactItem';
 
 const ContactList = ({
   contacts,
   search,
+  onLongPress,
 }) => (
   <View>
     <FlatList
@@ -33,6 +33,7 @@ const ContactList = ({
           name={name}
           phone={phone}
           photo={photo}
+          onLongPress={onLongPress}
         />
       )}
       keyExtractor={(contact) => contact.id.toString()}
@@ -40,9 +41,6 @@ const ContactList = ({
   </View>
 );
 
-const mapStateToProps = (state) => ({
-  contacts: state.contacts,
-});
 
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(PropTypes.shape({
@@ -52,6 +50,7 @@ ContactList.propTypes = {
     photo: PropTypes.string.isRequired,
   })).isRequired,
   search: PropTypes.string.isRequired,
+  onLongPress: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(ContactList);
+export default ContactList;
