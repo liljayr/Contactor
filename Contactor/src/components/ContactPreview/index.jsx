@@ -1,13 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
 import { View, FlatList } from 'react-native';
-=======
-import {
-  View, Text, Image, FlatList,
-} from 'react-native';
-// import { withNavigation } from 'react-navigation';
-import { connect } from 'react-redux';
->>>>>>> 56bd8eef2cb03a66d90b574b1bf95f7fe39e814c
 import PropTypes from 'prop-types';
 import PreviewItem from '../ContactPreviewItem';
 
@@ -35,12 +27,6 @@ const ContactPreview = ({
   </View>
 );
 
-<<<<<<< HEAD
-=======
-const mapStateToProps = (state) => ({
-  contacts: state.contacts,
-});
->>>>>>> 56bd8eef2cb03a66d90b574b1bf95f7fe39e814c
 
 ContactPreview.propTypes = {
   selectedContact: PropTypes.number.isRequired,
