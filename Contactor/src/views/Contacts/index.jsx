@@ -1,8 +1,5 @@
 import React from 'react';
 import { View, Alert } from 'react-native';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-// import { SearchBar } from 'react-native-elements';
 import ContactList from '../../components/ContactList';
 import TaskBar from '../../components/TaskBar';
 import AddModal from '../../components/Modal/AddContact';
@@ -113,7 +110,6 @@ class Contacts extends React.Component {
   render() {
     const {
       isAddModalOpen,
-      contacts,
       search,
     } = this.state;
     return (

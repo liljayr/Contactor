@@ -5,7 +5,6 @@ import ListItem from '../ContactItem';
 
 const ContactList = ({
   contacts,
-  search,
   onLongPress,
 }) => (
   <View>
@@ -38,7 +37,6 @@ ContactList.propTypes = {
     phone: PropTypes.string.isRequired,
     photo: PropTypes.string.isRequired,
   })).isRequired,
-  search: PropTypes.string.isRequired,
   onLongPress: PropTypes.func.isRequired,
 };
 
