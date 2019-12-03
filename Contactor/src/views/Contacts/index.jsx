@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 // import { SearchBar } from 'react-native-elements';
 import ContactList from '../../components/ContactList';
-import SearchBar from '../../components/SearchBar';
+import TaskBar from '../../components/TaskBar';
 import AddModal from '../../components/Modal/AddContact';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
 import { addContact } from '../../actions/contactAction';
@@ -59,9 +59,11 @@ class Contacts extends React.Component {
     } = this.state;
     return (
       <View>
-        <SearchBar
+        <TaskBar
           onAdd={() => this.setState({ isAddModalOpen: true })}
+          onRemove={() => this.setState({ isAddModalOpen: true })}
           onSearch={(searchInput) => this.onSearch(searchInput)}
+          hasSelected={false}
         />
         <ContactList
           search={search}
