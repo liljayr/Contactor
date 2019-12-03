@@ -7,13 +7,13 @@ import PropTypes from 'prop-types';
 import styles from './styles';
 
 const ContactItem = ({
-  id, name, phone, photo, navigation: { navigate },
+  id, name, photo, onLongPress, navigation: { navigate },
 }) => (
   <TouchableOpacity
+    onLongPress={() => onLongPress(id)}
     onPress={() => navigate('ContactPreviewView', { selectedContact: id })}
   >
     <View style={styles.itemContainer}>
-      <Text style={styles.title}>{id}</Text>
       <Text style={styles.title}>{name}</Text>
       <View>
         <Image
@@ -28,8 +28,8 @@ const ContactItem = ({
 ContactItem.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
+  onLongPress: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
