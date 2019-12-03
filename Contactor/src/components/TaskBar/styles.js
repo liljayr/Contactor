@@ -5,15 +5,15 @@ export default StyleSheet.create({
   toolbar: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 60,
+    height: 56,
     backgroundColor: purpleish,
   },
   toolbarSearch: {
-    flex: 1,
-    width: 500,
+    width: '60%',
+    height: 60,
   },
   toolbarAction: {
-    flex: 1,
+    width: '20%',
     alignItems: 'center',
   },
   toolbarActionText: {
