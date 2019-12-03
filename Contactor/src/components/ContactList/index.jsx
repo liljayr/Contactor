@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, FlatList } from 'react-native';
-import { connect } from 'react-redux';
 import ListItem from '../ContactItem';
 
 const ContactList = ({
@@ -34,9 +33,6 @@ const ContactList = ({
   </View>
 );
 
-const mapStateToProps = (state) => ({
-  contacts: state.contacts,
-});
 
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(PropTypes.shape({
@@ -47,4 +43,4 @@ ContactList.propTypes = {
   })).isRequired,
 };
 
-export default connect(mapStateToProps)(ContactList);
+export default ContactList;

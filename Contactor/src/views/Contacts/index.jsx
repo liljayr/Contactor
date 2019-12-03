@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import ContactList from '../../components/ContactList';
 import SearchBar from '../../components/SearchBar';
 import AddModal from '../../components/Modal/AddContact';
+import { addContactFile, getAllContacts } from '../../services/fileService';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
 import { addContact } from '../../actions/contactAction';
 
@@ -12,9 +13,15 @@ class Contacts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      contacts: [],
       isAddModalOpen: false,
       photo: '',
+      nextId: 1,
     };
+  }
+
+  async componentDidMount() {
+    await this.fetchItems();
   }
 
 
@@ -22,6 +29,13 @@ class Contacts extends React.Component {
     const photo = await takePhoto();
     if (photo.length > 0) { this.setState({ photo }); }
   }
+
+  async fetchItems() {
+    const contacts = await getAllContacts();
+    this.setState({ contacts });
+    if (contacts.length > 0) this.setState({ nextId: contacts[contacts.length - 1].id + 1 });
+  }
+
 
   async takePhoto() {
     const photo = await takePhoto();
@@ -35,18 +49,26 @@ class Contacts extends React.Component {
   }
 
   async addContact(name, phone) {
-    const { photo } = this.state;
+    const { photo, contacts, nextId } = this.state;
     const { addContactToState } = this.props;
+    const contactInfo = {
+      id: nextId, name, phone, photo,
+    };
+
+    // const newContact = `{name: ${name} phone: ${phone} photo: ${photo}}`;
     if (photo === '') {
       Alert.alert(
         'A photo is is required!',
         'You can add a photo by selecting the camera or album icon',
       );
     } else {
+      const newContact = await addContactFile(nextId, JSON.stringify(contactInfo));
       addContactToState(name, phone, photo);
       this.setState({
         isAddModalOpen: false,
         photo: '',
+        contacts: [...contacts, newContact],
+        nextId: nextId + 1,
       });
     }
   }
@@ -55,6 +77,7 @@ class Contacts extends React.Component {
   render() {
     const {
       isAddModalOpen,
+      contacts,
     } = this.state;
     return (
       <View>
@@ -62,7 +85,10 @@ class Contacts extends React.Component {
           onAdd={() => this.setState({ isAddModalOpen: true })}
           onSearch={() => this.onSearch()}
         />
-        <ContactList />
+
+        <ContactList
+          contacts={contacts}
+        />
 
         <AddModal
           isOpen={isAddModalOpen}
