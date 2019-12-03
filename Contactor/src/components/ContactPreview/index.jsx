@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, Image, FlatList} from 'react-native';
+import { View, FlatList} from 'react-native';
 //import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import PreviewItem from '../ContactItem';
+import PreviewItem from '../ContactPreviewItem';
 
 const ContactPreview = ({
   selectedContact, contacts, contactInfo,

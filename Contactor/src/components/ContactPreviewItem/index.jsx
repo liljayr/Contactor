@@ -9,21 +9,24 @@ const ContactPreviewItem = ({
 }) => (
   <View style={styles.itemContainer}>
     <View>
-      <Text style={backgroundColor:'red'}>{id}</Text>
-    </View>
-    <View style={styles.nameContainer}>
-      <Text style={styles.phoneTitle}>{name}</Text>
-    </View>
-    <View>
       <Image
         style={styles.image}
         resizeMode="cover"
         source={{ uri: photo }}
       />
     </View>
+    <View>
+      <Text style={styles.nameTitle}>{name}</Text>
+    </View>
+    <View style={styles.nameContainer}>
+      <Text style={styles.phoneTitle}>{phone}</Text>
+    </View>
+    <View>
+      <Text>"Edit button here!"</Text>
+    </View>
   </View>
 );
-ContactItem.propTypes = {
+ContactPreviewItem.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
@@ -32,4 +35,4 @@ ContactItem.propTypes = {
     navigate: PropTypes.func.isRequired,
   }).isRequired,
 };
-export default withNavigation(ContactItem);
+export default withNavigation(ContactPreviewItem);
