@@ -94,6 +94,7 @@ EditContact.propTypes = {
   selectFromCameraRoll: PropTypes.func.isRequired,
   oldName: PropTypes.string.isRequired,
   oldPhone: PropTypes.string.isRequired,
+  photo: PropTypes.string.isRequired,
 };
 
 export default EditContact;
