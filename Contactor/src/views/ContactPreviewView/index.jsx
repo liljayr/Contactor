@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+// import { Text } from 'react-native';
 import ContactPreview from '../../components/ContactPreview';
 // import mapStateToProps from
 

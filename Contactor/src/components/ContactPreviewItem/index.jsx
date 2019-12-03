@@ -22,7 +22,7 @@ const ContactPreviewItem = ({
       <Text style={styles.phoneTitle}>{phone}</Text>
     </View>
     <View>
-      <Text>"Edit button here!"</Text>
+      <Text>Edit button here!</Text>
     </View>
   </View>
 );

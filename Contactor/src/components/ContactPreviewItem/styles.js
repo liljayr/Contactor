@@ -9,13 +9,13 @@ export default StyleSheet.create({
     fontSize: 40,
     textAlign: 'center',
   },
-  nameContainer:{
-    flex:1,
+  nameContainer: {
+    flex: 1,
     padding: 10,
     position: 'relative',
   },
-  phoneTitle:{
-    fontSize:20,
+  phoneTitle: {
+    fontSize: 20,
     textAlign: 'center',
   },
   container: {
