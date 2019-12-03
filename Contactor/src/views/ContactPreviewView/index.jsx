@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { connect } from 'react-redux';
 import ContactPreview from '../../components/ContactPreview';
 // import mapStateToProps from
 
@@ -26,4 +25,4 @@ class ContactPreviewView extends React.Component {
   }
 }
 
-export default connect(null, {})(ContactPreviewView);
+export default ContactPreviewView;
