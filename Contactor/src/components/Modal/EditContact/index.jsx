@@ -23,6 +23,12 @@ class EditContact extends React.Component {
     };
   }
 
+  /* handleChangeName  event => {
+    this.setState({
+      name : event
+    });
+  } */
+
   render() {
     const {
       name, phone,
@@ -48,6 +54,7 @@ class EditContact extends React.Component {
           Name:
           </Text>
           <TextInput
+            value={oldName}
             onChangeText={(text) => this.setState({ name: text })}
             maxLength={29}
             style={defaultStyles.textInput}
