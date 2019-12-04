@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Alert } from 'react-native';
-// import { SearchBar } from 'react-native-elements';
+import { SearchBar, Text } from 'react-native-elements';
 import ContactList from '../../components/ContactList';
 import TaskBar from '../../components/TaskBar';
 import AddModal from '../../components/Modal/AddContact';
@@ -8,6 +8,7 @@ import {
   addContactFile, getAllContacts, remove, importAllContacts,
 } from '../../services/fileService';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
+import { pinkish } from '../../styles/colors';
 
 class Contacts extends React.Component {
   constructor(props) {
@@ -122,21 +123,29 @@ class Contacts extends React.Component {
     } = this.state;
     return (
       <View>
-        <TaskBar
-          onAdd={() => this.setState({ isAddModalOpen: true })}
-          onRemove={() => this.deleteSelectedContacts()}
-          onSearch={(searchInput) => this.onSearch(searchInput)}
-          value={search}
-          hasSelected={false}
-        />
-
+        <View>
+          <TaskBar
+            onAdd={() => this.setState({ isAddModalOpen: true })}
+            onRemove={() => this.deleteSelectedContacts()}
+            hasSelected={false}
+          />
+          <SearchBar
+            round
+            containerStyle={{backgroundColor: 'white', borderWidth: 0 }}
+            searchIcon={{ size: 25 }}
+            onChangeText={(searchInput) => this.onSearch(searchInput)}
+            onClear={() => this.onSearch('')}
+            placeholder="Type Here..."
+            value={search}
+          />
+          <Text h1 style={{ backgroundColor: 'white', textAlign: 'center' }}>Contacts</Text>
+        </View>
         <ContactList
           contacts={this.filterContacts(search)}
           search={search}
           onLongPress={(id) => this.onContactLongPress(id)}
           selectedContacts={selectedContacts}
         />
-
         <AddModal
           isOpen={isAddModalOpen}
           closeModal={() => this.setState({ isAddModalOpen: false })}

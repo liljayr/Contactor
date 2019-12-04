@@ -1,6 +1,8 @@
 import React from 'react';
-// import { Text } from 'react-native';
+import { View, Button } from 'react-native';
+import Call from 'react-native-phone-call';
 import ContactPreview from '../../components/ContactPreview';
+
 import {
   addContactFile, getAllContacts, remove, importAllContacts,
 } from '../../services/fileService';
@@ -18,13 +20,25 @@ class ContactPreviewView extends React.Component {
     // console.log(this.state);
   }
 
+  makeCall() {
+    // handler to make a call
+    // TODO: Needs access to the currentylu opne client to call that number
+    const args = {
+      number: '0000000000',
+      prompt: false,
+    };
+    Call(args).catch(console.error);
+  };
+
   render() {
     const { selectedContact } = this.state;
     return (
-      <ContactPreview
-        selectedContact={selectedContact, []}
-      />
-    // add Button added here
+      <View>
+        <ContactPreview
+          selectedContact={selectedContact, []}
+        />
+        <Button title="Make a Call" onPress={this.call} />
+      </View>
     );
   }
 }
