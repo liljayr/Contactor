@@ -24,9 +24,19 @@ class EditContact extends React.Component {
   }
 
   render() {
-    const { name, phone } = this.state;
     const {
-      isOpen, closeModal, onSubmit, takePhoto, selectFromCameraRoll, oldName, oldPhone, photo,
+      name, phone,
+    } = this.state;
+    const {
+      isOpen,
+      closeModal,
+      onSubmit,
+      takePhoto,
+      selectFromCameraRoll,
+      oldId,
+      oldName,
+      oldPhone,
+      oldPhoto,
     } = this.props;
     return (
       <Modal
@@ -39,7 +49,6 @@ class EditContact extends React.Component {
           </Text>
           <TextInput
             onChangeText={(text) => this.setState({ name: text })}
-            placeholder={oldName}
             maxLength={29}
             style={defaultStyles.textInput}
             textContentType="name"
@@ -49,7 +58,6 @@ class EditContact extends React.Component {
           </Text>
           <TextInput
             onChangeText={(text) => this.setState({ phone: text })}
-            placeholder={oldPhone}
             maxLength={29}
             style={defaultStyles.textInput}
             keyboardType="phone-pad"
@@ -57,7 +65,7 @@ class EditContact extends React.Component {
           />
         </View>
         <View>
-          <Image source={{ uri: photo }} />
+          <Image source={{ uri: oldPhoto }} />
         </View>
         <View
           style={styles.icons}
@@ -76,7 +84,7 @@ class EditContact extends React.Component {
               name: '',
               phone: '',
             });
-            onSubmit(name, phone);
+            onSubmit(oldId, name, phone);
           }}
         >
           <Text style={defaultStyles.buttonText}>Submit</Text>
@@ -92,9 +100,17 @@ EditContact.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   takePhoto: PropTypes.func.isRequired,
   selectFromCameraRoll: PropTypes.func.isRequired,
-  oldName: PropTypes.string.isRequired,
-  oldPhone: PropTypes.string.isRequired,
-  photo: PropTypes.string.isRequired,
+  oldId: PropTypes.number,
+  oldName: PropTypes.string,
+  oldPhone: PropTypes.string,
+  oldPhoto: PropTypes.string,
+};
+
+EditContact.defaultProps = {
+  oldId: -1,
+  oldName: '',
+  oldPhone: '',
+  oldPhoto: 'https://icon-library.net/images/default-profile-icon/default-profile-icon-16.jpg',
 };
 
 export default EditContact;

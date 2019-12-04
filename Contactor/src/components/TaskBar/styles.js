@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { purpleish, pinkish } from '../../styles/colors';
+import { purpleish } from '../../styles/colors';
 
 export default StyleSheet.create({
   toolbar: {

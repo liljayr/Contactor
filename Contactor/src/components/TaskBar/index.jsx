@@ -10,6 +10,8 @@ const TaskBar = ({
   onSearch,
   onAdd,
   onRemove,
+  onImport,
+  onClear,
   hasSelected,
   value,
 }) => (
@@ -33,9 +35,9 @@ const TaskBar = ({
     <View style={styles.toolbarAction}>
       <Button
         titleStyle={styles.toolbarActionText}
-        title="Edit" 
+        title="Clear" 
         type="clear"
-        onPress={onRemove} 
+        onPress={onClear} 
       />
     </View>
     <View style={styles.toolbarAction}>
@@ -43,7 +45,7 @@ const TaskBar = ({
         titleStyle={styles.toolbarActionText}
         title="Import" 
         type="clear"
-        onPress={onRemove} 
+        onPress={onImport} 
       />
     </View>
   </View>
@@ -58,8 +60,3 @@ TaskBar.propTypes = {
 };
 
 export default TaskBar;
-
-// <TextInput
-//   onChangeText={(text) => onSearch(text)}
-//   placeholder="Search"
-// />

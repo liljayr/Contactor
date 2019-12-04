@@ -21,6 +21,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     height: 100,
+    alignItems: 'center',
   },
   image: {
     width: winWidth * 0.45,

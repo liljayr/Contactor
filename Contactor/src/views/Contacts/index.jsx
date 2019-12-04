@@ -1,14 +1,18 @@
 import React from 'react';
 import { View, Alert } from 'react-native';
 import { SearchBar, Text } from 'react-native-elements';
+import { NavigationEvents } from 'react-navigation';
 import ContactList from '../../components/ContactList';
 import TaskBar from '../../components/TaskBar';
 import AddModal from '../../components/Modal/AddContact';
 import {
-  addContactFile, getAllContacts, remove, importAllContacts,
+  addContactFile,
+  getAllContacts,
+  remove,
+  importAllContacts,
+  cleanDirectory,
 } from '../../services/fileService';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
-import { pinkish } from '../../styles/colors';
 
 class Contacts extends React.Component {
   constructor(props) {
@@ -57,9 +61,18 @@ class Contacts extends React.Component {
     this.setState({ contacts });
     if (contacts.length > 0) {
       this.setState({ nextId: contacts[contacts.length - 1].id + 1 });
-    } else {
-      await importAllContacts();
     }
+  }
+
+  async importContacts() {
+    const { nextId } = this.state;
+    await importAllContacts(nextId);
+    await this.fetchItems();
+  }
+
+  async clearContacts() {
+    await cleanDirectory();
+    await this.fetchItems();
   }
 
 
@@ -83,7 +96,7 @@ class Contacts extends React.Component {
     // const newContact = `{name: ${name} phone: ${phone} photo: ${photo}}`;
     if (photo === '') {
       Alert.alert(
-        'A photo is is required!',
+        'A photo is required!',
         'You can add a photo by selecting the camera or album icon',
       );
     } else {
@@ -123,10 +136,14 @@ class Contacts extends React.Component {
     } = this.state;
     return (
       <View>
+        <NavigationEvents onDidFocus={() => this.fetchItems()} />
         <View>
           <TaskBar
             onAdd={() => this.setState({ isAddModalOpen: true })}
             onRemove={() => this.deleteSelectedContacts()}
+            onSearch={(searchInput) => this.onSearch(searchInput)}
+            onImport={() => this.importContacts()}
+            onClear={() => this.clearContacts()}
             hasSelected={false}
           />
           <SearchBar
