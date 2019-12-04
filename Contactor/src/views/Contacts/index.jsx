@@ -144,7 +144,7 @@ class Contacts extends React.Component {
             onSearch={(searchInput) => this.onSearch(searchInput)}
             onImport={() => this.importContacts()}
             onClear={() => this.clearContacts()}
-            hasSelected={false}
+            hasSelected={selectedContacts.length > 0}
           />
           <SearchBar
             round
