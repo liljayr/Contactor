@@ -2,7 +2,7 @@ import React from 'react';
 // import { Text } from 'react-native';
 import ContactPreview from '../../components/ContactPreview';
 import {
-  getContactById,
+  getContactById, loadContact, getAllContacts,
 } from '../../services/fileService';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
 // import mapStateToProps from
@@ -14,21 +14,37 @@ class ContactPreviewView extends React.Component {
     const selectedContact = navigation.getParam('selectedContact', -1);
     this.state = {
       selectedContact,
+      contactFound: {},
     };
     // console.log(this.state);
   }
 
+  async componentDidMount() {
+    await this.getContact();
+    // console.log('hellllo');
+  }
+
   async getContact() {
-    const contactFound = await getContactById(this.selectedContact);
-    return contactFound;
+    const { selectedContact } = this.state;
+    // console.log(selectedContact);
+    const contactFound = await getContactById(selectedContact);
+    this.setState({ contactFound });
+    // console.log(contactFound);
   }
 
   render() {
-    const { selectedContact } = this.state;
-    const contactFound = this.getContact();
+    const { selectedContact, contactFound } = this.state;
+    console.log(contactFound);
+    // const contactInfo =;
+    // const contactInfo = console.log(typeof (contactFound));
+    // console.log(contactInfo);
+    // console.log(typeof (contactInfo));
+    // console.log(selectedContact);
     return (
       <ContactPreview
-        selectedContact={contactFound}
+        name={contactFound.name}
+        phone={contactFound.phone}
+        photo={contactFound.photo}
       />
     // add Button added here
     );

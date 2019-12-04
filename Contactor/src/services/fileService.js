@@ -25,6 +25,7 @@ export const loadContact = async (fileName) => FileSystem.readAsStringAsync(`${c
 
 export const getContactById = async (id) => {
   const fileName = `${id}.json`;
+  console.log(fileName);
   return JSON.parse(await loadContact(fileName));
 };
 
