@@ -14,6 +14,15 @@ import EditModal from '../../components/Modal/EditContact';
 // import mapStateToProps from
 
 class ContactPreviewView extends React.Component {
+  static makeCall(number) {
+    // handler to make a call
+    const args = {
+      number,
+      prompt: false,
+    };
+    Call(args).catch(console.error());
+  }
+
   constructor(props) {
     super(props);
     const { navigation } = this.props;
@@ -66,16 +75,6 @@ class ContactPreviewView extends React.Component {
     if (photo.length > 0) { this.setState({ photo }); }
   }
 
-  makeCall() {
-    // handler to make a call
-    const { contactFound } = this.state;
-    const { number } = contactFound;
-    const args = {
-      number,
-      prompt: false,
-    };
-    Call(args).catch(console.error());
-  }
 
   render() {
     const { contactFound, isEditModalOpen } = this.state;
@@ -86,6 +85,14 @@ class ContactPreviewView extends React.Component {
           phone={contactFound.phone}
           photo={contactFound.photo}
         />
+        <TouchableOpacity
+          onPress={() => ContactPreviewView.makeCall(contactFound.phone)}
+        >
+          <Text>
+            Call
+            {contactFound.phone}
+          </Text>
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={() => this.setState({ isEditModalOpen: true })}
         >
