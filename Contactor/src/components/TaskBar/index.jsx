@@ -34,7 +34,7 @@ const TaskBar = ({
         onPress={onRemove}
         disable={hasSelected}
       >
-        <Text style={styles.toolbarActionText}>delete</Text>
+        <Text style={styles.toolbarActionText}>Delete</Text>
       </TouchableHighlight>
     </View>
   </View>

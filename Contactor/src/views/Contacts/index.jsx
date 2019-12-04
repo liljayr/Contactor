@@ -56,9 +56,13 @@ class Contacts extends React.Component {
     this.setState({ contacts });
     if (contacts.length > 0) {
       this.setState({ nextId: contacts[contacts.length - 1].id + 1 });
-    } else {
-      await importAllContacts();
     }
+  }
+
+  async importContacts() {
+    const { nextId } = this.state;
+    await importAllContacts(nextId);
+    await this.fetchItems();
   }
 
 
@@ -126,6 +130,7 @@ class Contacts extends React.Component {
           onAdd={() => this.setState({ isAddModalOpen: true })}
           onRemove={() => this.deleteSelectedContacts()}
           onSearch={(searchInput) => this.onSearch(searchInput)}
+          onImport={() => this.importContacts()}
           value={search}
           hasSelected={false}
         />
