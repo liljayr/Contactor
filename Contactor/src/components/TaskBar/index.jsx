@@ -13,13 +13,12 @@ const TaskBar = ({
   onImport,
   onClear,
   hasSelected,
-  value,
 }) => (
   <View styleName="horizontal" style={styles.toolbar}>
     <View style={styles.toolbarAction}>
-      <Button 
+      <Button
         titleStyle={styles.toolbarActionText}
-        title="Add" 
+        title="Add"
         type="clear"
         onPress={onAdd}
       />
@@ -27,7 +26,7 @@ const TaskBar = ({
     <View style={styles.toolbarAction}>
       <Button
         titleStyle={styles.toolbarActionText}
-        title="Remove" 
+        title="Remove"
         type="clear"
         onPress={onRemove}
         disabled={!hasSelected}
@@ -36,15 +35,15 @@ const TaskBar = ({
     <View style={styles.toolbarAction}>
       <Button
         titleStyle={styles.toolbarActionText}
-        title="Clear" 
+        title="Clear"
         type="clear"
-        onPress={onClear} 
+        onPress={onClear}
       />
     </View>
     <View style={styles.toolbarAction}>
       <Button
         titleStyle={styles.toolbarActionText}
-        title="Import" 
+        title="Import"
         type="clear"
         onPress={onImport}
         disabled={hasSelected} 
@@ -58,7 +57,6 @@ TaskBar.propTypes = {
   onAdd: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
   hasSelected: PropTypes.bool.isRequired,
-  value: PropTypes.string.isRequired,
 };
 
 export default TaskBar;

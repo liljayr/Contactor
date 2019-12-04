@@ -23,6 +23,12 @@ class EditContact extends React.Component {
     };
   }
 
+  /* handleChangeName  event => {
+    this.setState({
+      name : event
+    });
+  } */
+
   render() {
     const {
       name, phone,
@@ -34,8 +40,6 @@ class EditContact extends React.Component {
       takePhoto,
       selectFromCameraRoll,
       oldId,
-      oldName,
-      oldPhone,
       oldPhoto,
     } = this.props;
     return (
@@ -48,6 +52,7 @@ class EditContact extends React.Component {
           Name:
           </Text>
           <TextInput
+            value={oldName}
             onChangeText={(text) => this.setState({ name: text })}
             maxLength={29}
             style={defaultStyles.textInput}
@@ -101,15 +106,11 @@ EditContact.propTypes = {
   takePhoto: PropTypes.func.isRequired,
   selectFromCameraRoll: PropTypes.func.isRequired,
   oldId: PropTypes.number,
-  oldName: PropTypes.string,
-  oldPhone: PropTypes.string,
   oldPhoto: PropTypes.string,
 };
 
 EditContact.defaultProps = {
   oldId: -1,
-  oldName: '',
-  oldPhone: '',
   oldPhoto: 'https://icon-library.net/images/default-profile-icon/default-profile-icon-16.jpg',
 };
 
