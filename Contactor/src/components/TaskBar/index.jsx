@@ -29,7 +29,8 @@ const TaskBar = ({
         titleStyle={styles.toolbarActionText}
         title="Remove" 
         type="clear"
-        onPress={onRemove} 
+        onPress={onRemove}
+        disabled={!hasSelected}
       />
     </View>
     <View style={styles.toolbarAction}>
@@ -45,7 +46,8 @@ const TaskBar = ({
         titleStyle={styles.toolbarActionText}
         title="Import" 
         type="clear"
-        onPress={onImport} 
+        onPress={onImport}
+        disabled={hasSelected} 
       />
     </View>
   </View>

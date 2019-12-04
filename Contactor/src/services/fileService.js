@@ -2,7 +2,7 @@ import * as FileSystem from 'expo-file-system';
 import * as Contacts from 'expo-contacts';
 import * as Permissions from 'expo-permissions';
 
-const contactDirectory = `${FileSystem.documentDirectory}contacts`;
+const contactDirectory = `${FileSystem.documentDirectory}contactss`;
 
 const onException = (cb, errorHandler) => {
   try {
