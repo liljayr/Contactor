@@ -6,19 +6,20 @@ export default StyleSheet.create({
   nameTitle: {
     marginLeft: 10,
     marginRight: 10,
-    fontSize: 400,
+    fontSize: 40,
     textAlign: 'center',
-    color:"red",
   },
-  nameContainer:{
-    flex:1,
+  nameContainer: {
+    flex: 1,
     padding: 10,
+    position: 'relative',
   },
-  phoneTitle:{
-    fontSize:20,
+  phoneTitle: {
+    fontSize: 20,
+    textAlign: 'center',
   },
-  contatiner: {
-    flex:1,
+  container: {
+    flex: 1,
     height: 100,
   },
   image: {
@@ -27,8 +28,12 @@ export default StyleSheet.create({
     marginBottom: 10,
     marginLeft: 10,
     marginRight: 10,
+    borderRadius: 60,
+    alignItems: 'center',
   },
   itemContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
