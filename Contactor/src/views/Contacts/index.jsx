@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Alert } from 'react-native';
 // import { SearchBar } from 'react-native-elements';
+import { NavigationEvents } from 'react-navigation';
 import ContactList from '../../components/ContactList';
 import TaskBar from '../../components/TaskBar';
 import AddModal from '../../components/Modal/AddContact';
@@ -135,6 +136,7 @@ class Contacts extends React.Component {
     } = this.state;
     return (
       <View>
+        <NavigationEvents onDidFocus={() => this.fetchItems()} />
         <TaskBar
           onAdd={() => this.setState({ isAddModalOpen: true })}
           onRemove={() => this.deleteSelectedContacts()}
