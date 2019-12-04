@@ -67,10 +67,10 @@ export const getAllContacts = async () => {
 export const importAllContacts = async (id) => {
   const status = await Permissions.askAsync(Permissions.CONTACTS);
   if (status.permissions.contacts.status === 'granted') {
-    let data = await Contacts.getContactsAsync();
+    const { data } = await Contacts.getContactsAsync();
     if (data.length > 0) {
+      const results = [];
       let nextId = id;
-      data = data.data;
       let contactInfo = '';
       for (let i = 0; i < data.length; i += 1) {
         if (data[i].imageAvailable) {
@@ -88,9 +88,10 @@ export const importAllContacts = async (id) => {
             photo: 'https://icon-library.net/images/default-profile-icon/default-profile-icon-16.jpg',
           };
         }
+        results.push(addContactFile(nextId, JSON.stringify(contactInfo)));
         nextId += 1;
-        await addContactFile(i + 1, JSON.stringify(contactInfo));
       }
+      await Promise.all(results);
     }
   }
 };

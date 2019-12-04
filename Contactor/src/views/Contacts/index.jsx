@@ -5,7 +5,11 @@ import ContactList from '../../components/ContactList';
 import TaskBar from '../../components/TaskBar';
 import AddModal from '../../components/Modal/AddContact';
 import {
-  addContactFile, getAllContacts, remove, importAllContacts,
+  addContactFile,
+  getAllContacts,
+  remove,
+  importAllContacts,
+  cleanDirectory,
 } from '../../services/fileService';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
 
@@ -62,6 +66,11 @@ class Contacts extends React.Component {
   async importContacts() {
     const { nextId } = this.state;
     await importAllContacts(nextId);
+    await this.fetchItems();
+  }
+
+  async clearContacts() {
+    await cleanDirectory();
     await this.fetchItems();
   }
 
@@ -131,6 +140,7 @@ class Contacts extends React.Component {
           onRemove={() => this.deleteSelectedContacts()}
           onSearch={(searchInput) => this.onSearch(searchInput)}
           onImport={() => this.importContacts()}
+          onClear={() => this.clearContacts()}
           value={search}
           hasSelected={false}
         />
