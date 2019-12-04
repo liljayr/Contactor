@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  View, TouchableHighlight, Text,
+  View,
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import styles from './styles';
 
 const TaskBar = ({
-  onSearch,
   onAdd,
   onRemove,
   onImport,
@@ -46,14 +45,13 @@ const TaskBar = ({
         title="Import"
         type="clear"
         onPress={onImport}
-        disabled={hasSelected} 
+        disabled={hasSelected}
       />
     </View>
   </View>
 );
 
 TaskBar.propTypes = {
-  onSearch: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
   onImport: PropTypes.func.isRequired,

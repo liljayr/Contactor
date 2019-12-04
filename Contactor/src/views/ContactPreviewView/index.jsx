@@ -68,12 +68,13 @@ class ContactPreviewView extends React.Component {
 
   makeCall() {
     // handler to make a call
-    const { number } = this.state.contactFound;
+    const { contactFound } = this.state;
+    const { number } = contactFound;
     const args = {
       number,
       prompt: false,
     };
-    Call(args).catch(console.error);
+    Call(args).catch(console.error());
   }
 
   render() {
