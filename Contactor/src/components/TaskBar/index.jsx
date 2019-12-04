@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   View, TouchableHighlight, Text,
 } from 'react-native';
-import { SearchBar } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import styles from './styles';
 
 const TaskBar = ({
@@ -17,33 +17,36 @@ const TaskBar = ({
 }) => (
   <View styleName="horizontal" style={styles.toolbar}>
     <View style={styles.toolbarAction}>
-      <TouchableHighlight onPress={onAdd}>
-        <Text style={styles.toolbarActionText}>Add</Text>
-      </TouchableHighlight>
+      <Button 
+        titleStyle={styles.toolbarActionText}
+        title="Add" 
+        type="clear"
+        onPress={onAdd}
+      />
     </View>
     <View style={styles.toolbarAction}>
-      <TouchableHighlight
-        onPress={onRemove}
-        disable={hasSelected}
-      >
-        <Text style={styles.toolbarActionText}>Delete</Text>
-      </TouchableHighlight>
+      <Button
+        titleStyle={styles.toolbarActionText}
+        title="Remove" 
+        type="clear"
+        onPress={onRemove} 
+      />
     </View>
     <View style={styles.toolbarAction}>
-      <TouchableHighlight
-        onPress={onImport}
-        disable={hasSelected}
-      >
-        <Text style={styles.toolbarActionText}>onImport</Text>
-      </TouchableHighlight>
+      <Button
+        titleStyle={styles.toolbarActionText}
+        title="Clear" 
+        type="clear"
+        onPress={onClear} 
+      />
     </View>
     <View style={styles.toolbarAction}>
-      <TouchableHighlight
-        onPress={onClear}
-        disable={hasSelected}
-      >
-        <Text style={styles.toolbarActionText}>onClear</Text>
-      </TouchableHighlight>
+      <Button
+        titleStyle={styles.toolbarActionText}
+        title="Import" 
+        type="clear"
+        onPress={onImport} 
+      />
     </View>
   </View>
 );
@@ -57,8 +60,3 @@ TaskBar.propTypes = {
 };
 
 export default TaskBar;
-
-// <TextInput
-//   onChangeText={(text) => onSearch(text)}
-//   placeholder="Search"
-// />

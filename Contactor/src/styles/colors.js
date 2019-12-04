@@ -7,3 +7,4 @@ export const darkerBlue = '#42638E';
 export const pinkish = '#FFAABB';
 export const purpleish = '#7F2982';
 export const lightPurple = '#F1D4D4';
+export const lightGray = '#E2E5EA';

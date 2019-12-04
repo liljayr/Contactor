@@ -13,7 +13,8 @@ export default StyleSheet.create({
     height: 60,
   },
   toolbarAction: {
-    width: '20%',
+    margin: 2,
+    flex: 1,
     alignItems: 'center',
   },
   toolbarActionText: {

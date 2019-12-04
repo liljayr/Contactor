@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Alert } from 'react-native';
-// import { SearchBar } from 'react-native-elements';
+import { SearchBar, Text } from 'react-native-elements';
 import { NavigationEvents } from 'react-navigation';
 import ContactList from '../../components/ContactList';
 import TaskBar from '../../components/TaskBar';
@@ -137,23 +137,32 @@ class Contacts extends React.Component {
     return (
       <View>
         <NavigationEvents onDidFocus={() => this.fetchItems()} />
-        <TaskBar
-          onAdd={() => this.setState({ isAddModalOpen: true })}
-          onRemove={() => this.deleteSelectedContacts()}
-          onSearch={(searchInput) => this.onSearch(searchInput)}
-          onImport={() => this.importContacts()}
-          onClear={() => this.clearContacts()}
-          value={search}
-          hasSelected={false}
-        />
-
+        <View>
+          <TaskBar
+            onAdd={() => this.setState({ isAddModalOpen: true })}
+            onRemove={() => this.deleteSelectedContacts()}
+            onSearch={(searchInput) => this.onSearch(searchInput)}
+            onImport={() => this.importContacts()}
+            onClear={() => this.clearContacts()}
+            hasSelected={false}
+          />
+          <SearchBar
+            round
+            containerStyle={{backgroundColor: 'white', borderWidth: 0 }}
+            searchIcon={{ size: 25 }}
+            onChangeText={(searchInput) => this.onSearch(searchInput)}
+            onClear={() => this.onSearch('')}
+            placeholder="Type Here..."
+            value={search}
+          />
+          <Text h1 style={{ backgroundColor: 'white', textAlign: 'center' }}>Contacts</Text>
+        </View>
         <ContactList
           contacts={this.filterContacts(search)}
           search={search}
           onLongPress={(id) => this.onContactLongPress(id)}
           selectedContacts={selectedContacts}
         />
-
         <AddModal
           isOpen={isAddModalOpen}
           closeModal={() => this.setState({ isAddModalOpen: false })}

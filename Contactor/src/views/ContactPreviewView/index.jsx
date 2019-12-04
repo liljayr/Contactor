@@ -3,7 +3,9 @@ import {
   TouchableOpacity, View, Text, Alert,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import Call from 'react-native-phone-call';
 import ContactPreview from '../../components/ContactPreview';
+
 import {
   getContactById, editContactFile,
 } from '../../services/fileService';
@@ -62,6 +64,16 @@ class ContactPreviewView extends React.Component {
   async selectFromCameraRoll() {
     const photo = await selectFromCameraRoll();
     if (photo.length > 0) { this.setState({ photo }); }
+  }
+
+  makeCall() {
+    // handler to make a call
+    const { number } = this.state.contactFound;
+    const args = {
+      number,
+      prompt: false,
+    };
+    Call(args).catch(console.error);
   }
 
   render() {

@@ -27,9 +27,15 @@ const ContactPreview = ({
 );
 
 ContactPreview.propTypes = {
-  name: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
-  photo: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  phone: PropTypes.string,
+  photo: PropTypes.string,
+};
+
+ContactPreview.defaultProps = {
+  name: '',
+  phone: '',
+  photo: 'https://icon-library.net/images/default-profile-icon/default-profile-icon-16.jpg',
 };
 
 export default ContactPreview;
