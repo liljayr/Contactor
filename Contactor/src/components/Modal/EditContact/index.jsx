@@ -34,8 +34,6 @@ class EditContact extends React.Component {
       takePhoto,
       selectFromCameraRoll,
       oldId,
-      oldName,
-      oldPhone,
       oldPhoto,
     } = this.props;
     return (
@@ -101,15 +99,11 @@ EditContact.propTypes = {
   takePhoto: PropTypes.func.isRequired,
   selectFromCameraRoll: PropTypes.func.isRequired,
   oldId: PropTypes.number,
-  oldName: PropTypes.string,
-  oldPhone: PropTypes.string,
   oldPhoto: PropTypes.string,
 };
 
 EditContact.defaultProps = {
   oldId: -1,
-  oldName: '',
-  oldPhone: '',
   oldPhoto: 'https://icon-library.net/images/default-profile-icon/default-profile-icon-16.jpg',
 };
 
