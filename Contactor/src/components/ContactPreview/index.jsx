@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import PreviewItem from '../ContactPreviewItem';
 
 const ContactPreview = ({
-  selectedContact, contacts,
+  contactFound,
 }) => (
   <View>
     <FlatList
       numColumns={1}
-      data={contacts.filter((contact) => contact.id === selectedContact)}
+      data={contactFound}
       renderItem={({
         item: {
           id, name, phone, photo,
@@ -27,19 +27,8 @@ const ContactPreview = ({
   </View>
 );
 
-
 ContactPreview.propTypes = {
-  selectedContact: PropTypes.number.isRequired,
-};
-
-ContactPreview.propTypes = {
-  selectedContact: PropTypes.number.isRequired,
-  contacts: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
-    photo: PropTypes.string.isRequired,
-  })).isRequired,
+  contactFound: PropTypes.string.isRequired,
 };
 
 export default ContactPreview;

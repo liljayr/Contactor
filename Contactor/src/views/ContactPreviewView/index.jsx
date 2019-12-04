@@ -2,7 +2,7 @@ import React from 'react';
 // import { Text } from 'react-native';
 import ContactPreview from '../../components/ContactPreview';
 import {
-  addContactFile, getAllContacts, remove, importAllContacts,
+  getContactById,
 } from '../../services/fileService';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
 // import mapStateToProps from
@@ -18,11 +18,17 @@ class ContactPreviewView extends React.Component {
     // console.log(this.state);
   }
 
+  async getContact() {
+    const contactFound = await getContactById(this.selectedContact);
+    return contactFound;
+  }
+
   render() {
     const { selectedContact } = this.state;
+    const contactFound = this.getContact();
     return (
       <ContactPreview
-        selectedContact={selectedContact, []}
+        selectedContact={contactFound}
       />
     // add Button added here
     );
