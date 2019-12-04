@@ -82,7 +82,7 @@ class Contacts extends React.Component {
     // const newContact = `{name: ${name} phone: ${phone} photo: ${photo}}`;
     if (photo === '') {
       Alert.alert(
-        'A photo is is required!',
+        'A photo is required!',
         'You can add a photo by selecting the camera or album icon',
       );
     } else {

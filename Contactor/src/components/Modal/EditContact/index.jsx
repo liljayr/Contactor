@@ -17,16 +17,23 @@ import styles from './styles';
 class EditContact extends React.Component {
   constructor(props) {
     super(props);
+    const {
+      id, name, phone, photo,
+    } = props;
     this.state = {
-      name: '',
-      phone: '',
+      id,
+      name,
+      phone,
+      photo,
     };
   }
 
   render() {
-    const { name, phone } = this.state;
     const {
-      isOpen, closeModal, onSubmit, takePhoto, selectFromCameraRoll, oldName, oldPhone, photo,
+      id, name, phone, photo,
+    } = this.state;
+    const {
+      isOpen, closeModal, onSubmit, takePhoto, selectFromCameraRoll,
     } = this.props;
     return (
       <Modal
@@ -38,8 +45,8 @@ class EditContact extends React.Component {
           Name:
           </Text>
           <TextInput
+            value={name}
             onChangeText={(text) => this.setState({ name: text })}
-            placeholder={oldName}
             maxLength={29}
             style={defaultStyles.textInput}
             textContentType="name"
@@ -48,8 +55,8 @@ class EditContact extends React.Component {
           Phone:
           </Text>
           <TextInput
+            value={phone}
             onChangeText={(text) => this.setState({ phone: text })}
-            placeholder={oldPhone}
             maxLength={29}
             style={defaultStyles.textInput}
             keyboardType="phone-pad"
@@ -76,7 +83,7 @@ class EditContact extends React.Component {
               name: '',
               phone: '',
             });
-            onSubmit(name, phone);
+            onSubmit(id, name, phone, photo);
           }}
         >
           <Text style={defaultStyles.buttonText}>Submit</Text>
@@ -92,8 +99,9 @@ EditContact.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   takePhoto: PropTypes.func.isRequired,
   selectFromCameraRoll: PropTypes.func.isRequired,
-  oldName: PropTypes.string.isRequired,
-  oldPhone: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
 };
 
