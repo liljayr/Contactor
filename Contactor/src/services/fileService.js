@@ -24,7 +24,6 @@ export const loadContact = async (fileName) => FileSystem.readAsStringAsync(`${c
 
 export const getContactById = async (id) => {
   const fileName = `${id}.json`;
-  console.log(fileName);
   return JSON.parse(await loadContact(fileName));
 };
 
@@ -43,7 +42,7 @@ export const addContactFile = async (id, contents) => {
 
 export const remove = async (name) => onException(() => FileSystem.deleteAsync(`${contactDirectory}/${name}.json`, { idempotent: true }));
 
-export const editContact = async (id, contents) => {
+export const editContactFile = async (id, contents) => {
   remove(id);
   return addContactFile(id, contents);
 };

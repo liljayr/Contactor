@@ -1,8 +1,11 @@
 import React from 'react';
-import { TouchableOpacity, View, Text } from 'react-native';
+import {
+  TouchableOpacity, View, Text, Alert,
+} from 'react-native';
+import PropTypes from 'prop-types';
 import ContactPreview from '../../components/ContactPreview';
 import {
-  getContactById, addContactFile,
+  getContactById, editContactFile,
 } from '../../services/fileService';
 import { takePhoto, selectFromCameraRoll } from '../../services/imageService';
 import EditModal from '../../components/Modal/EditContact';
@@ -17,13 +20,12 @@ class ContactPreviewView extends React.Component {
       selectedContact,
       contactFound: {},
       isEditModalOpen: false,
+      photo: '',
     };
-    // console.log(this.state);
   }
 
   async componentDidMount() {
     await this.getContact();
-    // console.log('hellllo');
   }
 
   async getContact() {
@@ -32,8 +34,8 @@ class ContactPreviewView extends React.Component {
     this.setState({ contactFound });
   }
 
-  async editContact(id, name, phone, photo) {
-    let { contactFound } = this;
+  async editContact(id, name, phone) {
+    const { photo } = this.state;
     const contactInfo = {
       id, name, phone, photo,
     };
@@ -44,10 +46,10 @@ class ContactPreviewView extends React.Component {
         'You can add a photo by selecting the camera or album icon',
       );
     } else {
-      contactFound = await addContactFile(id, JSON.stringify(contactInfo));
+      const contactFound = await editContactFile(id, JSON.stringify(contactInfo));
       this.setState({
         isEditModalOpen: false,
-
+        contactFound,
       });
     }
   }
@@ -63,7 +65,7 @@ class ContactPreviewView extends React.Component {
   }
 
   render() {
-    const { selectedContact, contactFound, isEditModalOpen } = this.state;
+    const { contactFound, isEditModalOpen } = this.state;
     return (
       <View>
         <ContactPreview
@@ -79,12 +81,12 @@ class ContactPreviewView extends React.Component {
             isOpen={isEditModalOpen}
             closeModal={() => this.setState({ isEditModalOpen: false })}
             takePhoto={() => this.takePhoto()}
-            onSubmit={(id, name, phone, photo) => this.editContact(id, name, phone, photo)}
+            onSubmit={(id, name, phone) => this.editContact(id, name, phone)}
             selectFromCameraRoll={() => this.selectFromCameraRoll()}
-            id={contactFound.id}
-            name={contactFound.name}
-            phone={contactFound.phone}
-            photo={contactFound.photo}
+            oldId={contactFound.id}
+            oldName={contactFound.name}
+            oldPhone={contactFound.phone}
+            oldPhoto={contactFound.photo}
           />
         </TouchableOpacity>
       </View>
@@ -92,5 +94,13 @@ class ContactPreviewView extends React.Component {
     );
   }
 }
+
+ContactPreviewView.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    getParam: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
 
 export default ContactPreviewView;

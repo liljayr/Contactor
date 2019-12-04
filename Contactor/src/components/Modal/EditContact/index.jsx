@@ -17,23 +17,26 @@ import styles from './styles';
 class EditContact extends React.Component {
   constructor(props) {
     super(props);
-    const {
-      id, name, phone, photo,
-    } = props;
     this.state = {
-      id,
-      name,
-      phone,
-      photo,
+      name: '',
+      phone: '',
     };
   }
 
   render() {
     const {
-      id, name, phone, photo,
+      name, phone,
     } = this.state;
     const {
-      isOpen, closeModal, onSubmit, takePhoto, selectFromCameraRoll,
+      isOpen,
+      closeModal,
+      onSubmit,
+      takePhoto,
+      selectFromCameraRoll,
+      oldId,
+      oldName,
+      oldPhone,
+      oldPhoto,
     } = this.props;
     return (
       <Modal
@@ -45,7 +48,7 @@ class EditContact extends React.Component {
           Name:
           </Text>
           <TextInput
-            value={name}
+            value={oldName}
             onChangeText={(text) => this.setState({ name: text })}
             maxLength={29}
             style={defaultStyles.textInput}
@@ -55,7 +58,7 @@ class EditContact extends React.Component {
           Phone:
           </Text>
           <TextInput
-            value={phone}
+            value={oldPhone}
             onChangeText={(text) => this.setState({ phone: text })}
             maxLength={29}
             style={defaultStyles.textInput}
@@ -64,7 +67,7 @@ class EditContact extends React.Component {
           />
         </View>
         <View>
-          <Image source={{ uri: photo }} />
+          <Image source={{ uri: oldPhoto }} />
         </View>
         <View
           style={styles.icons}
@@ -83,7 +86,7 @@ class EditContact extends React.Component {
               name: '',
               phone: '',
             });
-            onSubmit(id, name, phone, photo);
+            onSubmit(oldId, name, phone);
           }}
         >
           <Text style={defaultStyles.buttonText}>Submit</Text>
@@ -99,10 +102,10 @@ EditContact.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   takePhoto: PropTypes.func.isRequired,
   selectFromCameraRoll: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
-  photo: PropTypes.string.isRequired,
+  oldId: PropTypes.number.isRequired,
+  oldName: PropTypes.string.isRequired,
+  oldPhone: PropTypes.string.isRequired,
+  oldPhoto: PropTypes.string.isRequired,
 };
 
 export default EditContact;
