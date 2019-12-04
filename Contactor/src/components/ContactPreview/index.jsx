@@ -6,7 +6,7 @@ import styles from './styles';
 const ContactPreview = ({
   name, phone, photo,
 }) => (
-  <View>
+  <View style={styles.itemContainer}>
     <View>
       <Image
         style={styles.image}
@@ -19,9 +19,6 @@ const ContactPreview = ({
     </View>
     <View style={styles.nameContainer}>
       <Text style={styles.phoneTitle}>{phone}</Text>
-    </View>
-    <View>
-      <Text>Edit button here!</Text>
     </View>
   </View>
 );
