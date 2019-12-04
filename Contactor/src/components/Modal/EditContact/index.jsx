@@ -49,7 +49,7 @@ class EditContact extends React.Component {
           </Text>
           <TextInput
             value={oldName}
-            onChangeText={(text) => this.setState({ name: text })}
+            onChangeText={(text) => this.setState({ oldName: text })}
             maxLength={29}
             style={defaultStyles.textInput}
             textContentType="name"
