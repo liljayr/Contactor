@@ -54,6 +54,8 @@ TaskBar.propTypes = {
   onSearch: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
+  onImport: PropTypes.func.isRequired,
+  onClear: PropTypes.func.isRequired,
   hasSelected: PropTypes.bool.isRequired,
 };
 

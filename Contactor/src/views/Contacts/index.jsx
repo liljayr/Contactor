@@ -148,7 +148,7 @@ class Contacts extends React.Component {
           />
           <SearchBar
             round
-            containerStyle={{backgroundColor: 'white', borderWidth: 0 }}
+            containerStyle={{ backgroundColor: 'white', borderWidth: 0 }}
             searchIcon={{ size: 25 }}
             onChangeText={(searchInput) => this.onSearch(searchInput)}
             onClear={() => this.onSearch('')}
