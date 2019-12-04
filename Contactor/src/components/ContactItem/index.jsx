@@ -19,14 +19,13 @@ const ContactItem = ({
     onPress={() => navigate('ContactPreviewView', { selectedContact: id })}
   >
     <View style={[{ opacity: isSelected ? 0.5 : 1 }, styles.itemContainer]}>
-      <Text style={styles.title}>{name}</Text>
       <View>
         <Image
-          style={styles.image}
-          resizeMode="cover"
+          style={styles.thumbnail}
           source={{ uri: photo }}
         />
       </View>
+      <Text style={styles.title}>{name}</Text>
     </View>
   </TouchableOpacity>
 );
