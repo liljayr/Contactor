@@ -35,7 +35,7 @@ export default StyleSheet.create({
   image: {
     width: winWidth * 0.45,
     height: winWidth * 0.45,
-    marginTop: 40,
+    marginTop: 60,
     marginBottom: 10,
     borderRadius: 60,
     alignItems: 'center',
