@@ -4,6 +4,9 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Call from 'react-native-phone-call';
+import { Ionicons } from '@expo/vector-icons';
+import { purpleish } from '../../styles/colors';
+import styles from './styles';
 import ContactPreview from '../../components/ContactPreview';
 
 import {
@@ -88,14 +91,15 @@ class ContactPreviewView extends React.Component {
         <TouchableOpacity
           onPress={() => ContactPreviewView.makeCall(contactFound.phone)}
         >
-          <Text>
-            Call
-            {contactFound.phone}
-          </Text>
+          <View style={styles.container}>
+            <Text style={styles.phoneTitle}>{contactFound.phone}</Text>
+            <Ionicons name="md-call" size={24} color="green" />
+          </View>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => this.setState({ isEditModalOpen: true })}
         >
+          <Ionicons name="edit-2" size={24} color={purpleish} />
           <Text>Edit</Text>
           <EditModal
             isOpen={isEditModalOpen}

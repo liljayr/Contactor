@@ -17,9 +17,11 @@ const ContactPreview = ({
     <View>
       <Text style={styles.nameTitle}>{name}</Text>
     </View>
+    {/*
     <View style={styles.nameContainer}>
       <Text style={styles.phoneTitle}>{phone}</Text>
     </View>
+    */}
   </View>
 );
 

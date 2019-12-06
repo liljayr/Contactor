@@ -20,12 +20,13 @@ export default StyleSheet.create({
     marginRight: 10,
   },
   thumbnail: {
-    width: 51,
-    height: 51,
+    width: 50,
+    height: 50,
     marginTop: 10,
     marginBottom: 10,
     marginLeft: 30,
     marginRight: 10,
+    borderRadius: 40,
     resizeMode: 'cover',
   },
   itemContainer: {
